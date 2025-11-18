@@ -1,94 +1,106 @@
 // Данные о продуктах
 const products = [
+    // Белые схемы
     {
         id: 1,
-        title: "Мануал iPhone 15",
-        category: "смартфоны",
-        price: 299,
-        emoji: "📱",
-        description: "Полный мануал по использованию iPhone 15 с советами и трюками",
-        rating: 4.8,
-        reviews: 156
+        title: "Схема Arduino Uno",
+        category: "белые схемы",
+        price: 199,
+        emoji: "�",
+        description: "Полная схема подключения и настройки Arduino Uno с примерами кода",
+        rating: 4.9,
+        reviews: 234,
+        color: "white"
     },
     {
         id: 2,
-        title: "Руководство Samsung Galaxy S24",
-        category: "смартфоны",
+        title: "Схема Raspberry Pi 4",
+        category: "белые схемы",
         price: 249,
-        emoji: "📞",
-        description: "Подробное руководство для пользователей Samsung Galaxy S24",
-        rating: 4.7,
-        reviews: 134
+        emoji: "🎛️",
+        description: "Детальная схема распиновки и подключения Raspberry Pi 4",
+        rating: 4.8,
+        reviews: 178,
+        color: "white"
     },
     {
         id: 3,
-        title: "Мануал MacBook Pro",
-        category: "ноутбуки",
-        price: 399,
-        emoji: "💻",
-        description: "Полное руководство по использованию MacBook Pro 2024",
-        rating: 4.9,
-        reviews: 289
+        title: "Схема LED матрицы",
+        category: "белые схемы",
+        price: 149,
+        emoji: "�",
+        description: "Полная документация по подключению и программированию LED матриц",
+        rating: 4.7,
+        reviews: 156,
+        color: "white"
     },
+    // Серые схемы
     {
         id: 4,
-        title: "Инструкция Sony WH-1000XM5",
-        category: "техника",
-        price: 99,
-        emoji: "🎧",
-        description: "Мануал по настройке и использованию наушников Sony",
-        rating: 4.6,
-        reviews: 87
+        title: "Схема Bluetooth модуля HC-05",
+        category: "серые схемы",
+        price: 179,
+        emoji: "📡",
+        description: "Схема подключения и настройки Bluetooth модуля HC-05",
+        rating: 4.8,
+        reviews: 145,
+        color: "gray"
     },
     {
         id: 5,
-        title: "Руководство Elden Ring",
-        category: "игры",
-        price: 199,
-        emoji: "🎮",
-        description: "Полный гайд по прохождению игры Elden Ring",
-        rating: 4.9,
-        reviews: 412
+        title: "Схема LCD дисплея",
+        category: "серые схемы",
+        price: 189,
+        emoji: "📺",
+        description: "Инструкция по подключению LCD 16x2 дисплея к микроконтроллерам",
+        rating: 4.7,
+        reviews: 167,
+        color: "gray"
     },
     {
         id: 6,
-        title: "Мануал Canon EOS R6",
-        category: "техника",
-        price: 349,
-        emoji: "📷",
-        description: "Подробное руководство для фотокамеры Canon EOS R6",
-        rating: 4.8,
-        reviews: 198
+        title: "Схема датчика влажности DHT22",
+        category: "серые схемы",
+        price: 159,
+        emoji: "�",
+        description: "Полная документация по использованию датчика влажности и температуры",
+        rating: 4.9,
+        reviews: 189,
+        color: "gray"
     },
+    // Черные схемы
     {
         id: 7,
-        title: "Инструкция DJI Air 3",
-        category: "техника",
-        price: 279,
-        emoji: "🚁",
-        description: "Полное руководство по использованию дрона DJI Air 3",
-        rating: 4.7,
-        reviews: 156
+        title: "Схема GPU NVIDIA RTX 4090",
+        category: "чёрные схемы",
+        price: 399,
+        emoji: "⚡",
+        description: "Техническая документация и схема архитектуры NVIDIA RTX 4090",
+        rating: 4.9,
+        reviews: 312,
+        color: "black"
     },
     {
         id: 8,
-        title: "Гайд Baldur's Gate 3",
-        category: "игры",
-        price: 219,
-        emoji: "⚔️",
-        description: "Максимальный гайд по Baldur's Gate 3 с всеми тайнами",
-        rating: 4.9,
-        reviews: 523
+        title: "Схема процессора Intel Core i9",
+        category: "чёрные схемы",
+        price: 349,
+        emoji: "🔧",
+        description: "Детальная схема и инструкция по разборке Intel Core i9",
+        rating: 4.8,
+        reviews: 278,
+        color: "black"
     },
     {
         id: 9,
-        title: "Мануал iPad Pro",
-        category: "техника",
-        price: 329,
-        emoji: "📱",
-        description: "Полное руководство для iPad Pro 2024",
-        rating: 4.8,
-        reviews: 267
+        title: "Схема материнской платы ASUS ROG",
+        category: "чёрные схемы",
+        price: 299,
+        emoji: "⚙️",
+        description: "Полная техническая документация и схема материнской платы ASUS ROG",
+        rating: 4.9,
+        reviews: 295,
+        color: "black"
     }
 ];
 
@@ -141,6 +153,7 @@ function renderProducts(productsToRender) {
     productsToRender.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
+        productCard.setAttribute('data-category', product.category);
         productCard.innerHTML = `
             <div class="product-image">${product.emoji}</div>
             <div class="product-info">
@@ -148,10 +161,7 @@ function renderProducts(productsToRender) {
                 <h3 class="product-title">${product.title}</h3>
                 <p class="product-description">${product.description}</p>
                 <div class="product-footer">
-                    <div>
-                        <div class="product-price">${product.price} ₽</div>
-                        <div class="product-rating">⭐ ${product.rating} (${product.reviews})</div>
-                    </div>
+                    <div class="product-price">${product.price} ₽</div>
                 </div>
             </div>
             <button class="add-to-cart-btn" onclick="openProductModal(${product.id})">Подробнее</button>
