@@ -1,0 +1,1396 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #ccc;
+    background-color: #2a2a2a;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #1a1a1a;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #888;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    flex: 1;
+    margin-left: 3rem;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #999;
+}
+
+.cart-icon {
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    background-color: #555;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    color: #ccc;
+}
+
+.cart-icon:hover {
+    background-color: #777;
+}
+
+.cart-count {
+    background-color: #666;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    color: white;
+    padding: 0;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #e0e0e0;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+    color: #b0b0b0;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #555;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #777;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.btn-secondary {
+    background-color: #666;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #888;
+}
+
+.btn-block {
+    width: 100%;
+    display: block;
+}
+
+/* Crystal Styles */
+.crystals-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin: 3rem 0 3rem 0;
+    flex-wrap: wrap;
+}
+
+.crystal-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Crystal Slider */
+.crystal-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    overflow: hidden;
+}
+
+.slider-left {
+    flex: 1;
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 42, 42, 0.95) 100%);
+    z-index: 10;
+}
+
+.description-content {
+    max-width: 500px;
+    text-align: left;
+}
+
+.crystal-title {
+    font-size: 3rem;
+    color: #ddd;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.crystal-description {
+    font-size: 1.1rem;
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.crystal-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-label {
+    color: #999;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 100px;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 4px;
+    background-color: #444;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.stat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #888, #ddd);
+    border-radius: 2px;
+}
+
+.slider-right {
+    flex: 1;
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+    position: relative;
+    height: 100vh;
+}
+
+.crystal-display {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crystal-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.crystal-item.active {
+    opacity: 1;
+}
+
+.crystal-large {
+    position: relative;
+    width: 250px;
+    height: 400px;
+    z-index: 10;
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border: 2px solid #666;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ddd;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s;
+    z-index: 100;
+}
+
+.nav-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: #999;
+    color: #fff;
+}
+
+.arrow-left {
+    left: 30px;
+}
+
+.arrow-right {
+    right: 30px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background-color: #ddd;
+    transform: scale(1.3);
+}
+
+.dot:hover {
+    background-color: #999;
+}
+
+/* Hexagon shapes */
+.hexagon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.hexagon-1 {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.hexagon-2 {
+    clip-path: polygon(50% 15%, 85% 40%, 85% 85%, 50% 100%, 15% 85%, 15% 40%);
+    opacity: 0.6;
+}
+
+.hexagon-3 {
+    clip-path: polygon(50% 30%, 70% 50%, 70% 75%, 50% 90%, 30% 75%, 30% 50%);
+    opacity: 0.3;
+}
+
+/* White Crystal with Sun Glow */
+.white-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.2), inset 2px 2px 5px rgba(255,255,255,0.8);
+}
+
+.white-crystal .hexagon-2 {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.white-crystal .hexagon-3 {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.sun-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 40%, transparent 70%);
+    animation: sunglow 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes sunglow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* Gray Crystal with Wave Effect */
+.gray-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #a0a0a0 0%, #707070 100%);
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.3);
+}
+
+.gray-crystal .hexagon-2 {
+    background: rgba(160, 160, 160, 0.7);
+}
+
+.gray-crystal .hexagon-3 {
+    background: rgba(160, 160, 160, 0.4);
+}
+
+.wave-effect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.wave-effect::before,
+.wave-effect::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    animation: wave-pulse 2s ease-out infinite;
+}
+
+.wave-effect::after {
+    animation-delay: 0.6s;
+}
+
+@keyframes wave-pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* Black Crystal with Flame Effect */
+.black-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.8), inset 2px 2px 5px rgba(255,255,255,0.1);
+}
+
+.black-crystal .hexagon-2 {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.black-crystal .hexagon-3 {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.flame-effect {
+    position: absolute;
+    width: 150px;
+    height: 200px;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.flame {
+    position: absolute;
+    width: 40px;
+    height: 80px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(50, 50, 50, 0.5), transparent);
+    border-radius: 50% 50% 50% 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flame-flicker 1.5s ease-in-out infinite;
+    filter: blur(2px);
+}
+
+.flame:nth-child(1) {
+    left: 15%;
+    animation-delay: 0s;
+    width: 35px;
+}
+
+.flame:nth-child(2) {
+    left: 50%;
+    animation-delay: 0.2s;
+    width: 50px;
+    opacity: 0.8;
+}
+
+.flame:nth-child(3) {
+    left: 85%;
+    animation-delay: 0.4s;
+    width: 35px;
+    opacity: 0.6;
+}
+
+@keyframes flame-flicker {
+    0%, 100% {
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateX(-50% + 3px) scaleY(1.1) scaleX(0.95);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(0.9) scaleX(1.05);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateX(-50% - 3px) scaleY(1.15) scaleX(0.9);
+        opacity: 0.75;
+    }
+}
+
+/* Large Crystal Styles for Slider */
+
+/* White Crystal Large */
+.white-crystal-item .white-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2), inset 3px 3px 8px rgba(255,255,255,0.9);
+}
+
+.white-crystal-item .white-crystal .hexagon-2 {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.white-crystal-item .white-crystal .hexagon-3 {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.sun-rays {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.sun-rays::before,
+.sun-rays::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sun-rays::before {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: ray-rotate 20s linear infinite;
+}
+
+.sun-rays::after {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: ray-rotate 20s linear infinite 5s;
+}
+
+@keyframes ray-rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.sun-glow {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 200, 0.4) 40%, transparent 70%);
+    animation: sunglow 3s ease-in-out infinite;
+    z-index: 0;
+    box-shadow: 0 0 100px rgba(255,255,255,0.3);
+}
+
+/* Gray Crystal Large */
+.gray-crystal-item .gray-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #b0b0b0 0%, #808080 100%);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.4), inset 3px 3px 8px rgba(255,255,255,0.2);
+}
+
+.gray-crystal-item .gray-crystal .hexagon-2 {
+    background: rgba(176, 176, 176, 0.8);
+}
+
+.gray-crystal-item .gray-crystal .hexagon-3 {
+    background: rgba(176, 176, 176, 0.5);
+}
+
+.energy-pulses {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.pulse {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(176, 176, 176, 0.6);
+    animation: pulse-wave 3s ease-out infinite;
+}
+
+.pulse:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.pulse:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.pulse:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes pulse-wave {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Black Crystal Large */
+.black-crystal-item .black-crystal .hexagon-1 {
+    background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.9), inset 3px 3px 8px rgba(255,255,255,0.05);
+}
+
+.black-crystal-item .black-crystal .hexagon-2 {
+    background: rgba(0, 0, 0, 0.95);
+}
+
+.black-crystal-item .black-crystal .hexagon-3 {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.dark-aura {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(50, 0, 50, 0.3) 40%, transparent 70%);
+    z-index: 0;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+    animation: dark-pulse 4s ease-in-out infinite;
+}
+
+@keyframes dark-pulse {
+    0%, 100% {
+        filter: brightness(0.8);
+    }
+    50% {
+        filter: brightness(1);
+    }
+}
+
+.flame-effect-enhanced {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.flame-top,
+.flame-mid,
+.flame-bot {
+    position: absolute;
+    width: 50px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(60, 0, 60, 0.5), transparent);
+    border-radius: 50% 50% 50% 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: blur(3px);
+}
+
+.flame-top {
+    height: 100px;
+    animation: flame-rise 2s ease-in-out infinite;
+}
+
+.flame-top:nth-child(1) {
+    left: 15%;
+    width: 40px;
+    animation-delay: 0s;
+    opacity: 0.6;
+}
+
+.flame-top:nth-child(2) {
+    left: 50%;
+    width: 60px;
+    animation-delay: 0.1s;
+    opacity: 0.8;
+}
+
+.flame-top:nth-child(3) {
+    left: 85%;
+    width: 40px;
+    animation-delay: 0.2s;
+    opacity: 0.6;
+}
+
+.flame-mid {
+    height: 80px;
+    width: 50px;
+}
+
+.flame-mid:nth-child(4) {
+    left: 20%;
+    animation: flame-rise 2.2s ease-in-out infinite 0.3s;
+    opacity: 0.5;
+}
+
+.flame-mid:nth-child(5) {
+    left: 80%;
+    animation: flame-rise 2.1s ease-in-out infinite 0.4s;
+    opacity: 0.5;
+}
+
+.flame-bot {
+    height: 60px;
+    width: 40px;
+}
+
+.flame-bot:nth-child(6) {
+    left: 50%;
+    animation: flame-rise 1.8s ease-in-out infinite 0.5s;
+    opacity: 0.4;
+}
+
+@keyframes flame-rise {
+    0% {
+        transform: translateX(-50%) scaleY(0.8) scaleX(1.2);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateX(-50%) scaleY(1.2) scaleX(0.9);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateX(-50%) scaleY(0.8) scaleX(1.2);
+        opacity: 0.4;
+    }
+}
+
+/* Catalog Section */
+.catalog {
+    padding: 4rem 0;
+    background-color: #3a3a3a;
+}
+
+.catalog h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #ddd;
+}
+
+.filter-section {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-box,
+.category-filter {
+    padding: 0.75rem 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-width: 250px;
+    background-color: #2a2a2a;
+    color: #ccc;
+}
+
+.search-box:focus,
+.category-filter:focus {
+    outline: none;
+    border-color: #777;
+    box-shadow: 0 0 5px rgba(255,255,255,0.1);
+}
+
+/* Products Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #444 0%, #333 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: white;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-category {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #ddd;
+}
+
+.product-description {
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem 0;
+    height: 2.7rem;
+    overflow: hidden;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.product-rating {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.add-to-cart-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #777;
+}
+
+/* About Section */
+.about {
+    padding: 4rem 0;
+    background-color: #3a3a3a;
+}
+
+.about h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #ddd;
+}
+
+.about p {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #aaa;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Contact Section */
+.contact {
+    padding: 4rem 0;
+    background-color: #2a2a2a;
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #ddd;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #3a3a3a;
+    color: #ccc;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #777;
+    box-shadow: 0 0 5px rgba(255,255,255,0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #1a1a1a;
+    color: #999;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: #2a2a2a;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    animation: slideIn 0.3s;
+    color: #ccc;
+}
+
+.modal-content h2 {
+    color: #ddd;
+}
+
+.modal-product {
+    max-width: 700px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #777;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #aaa;
+}
+
+/* Cart Items */
+.cart-items {
+    margin: 1.5rem 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #444;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    color: #ddd;
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+    color: #aaa;
+    font-weight: bold;
+}
+
+.cart-remove {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-remove:hover {
+    background-color: #777;
+}
+
+.cart-total {
+    padding: 1rem;
+    background-color: #3a3a3a;
+    border-radius: 5px;
+    text-align: right;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 2rem;
+    color: #777;
+}
+
+/* Product Details Modal */
+.product-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.product-details-image {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, #444 0%, #333 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: white;
+}
+
+.product-details-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.product-details-price {
+    font-size: 1.8rem;
+    color: #aaa;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.product-details-category {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.product-details-description {
+    color: #999;
+    line-height: 1.8;
+    margin: 1rem 0;
+}
+
+.product-quantity {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    color: #ccc;
+}
+
+.quantity-input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #3a3a3a;
+    color: #ccc;
+}
+
+.quantity-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity-btn:hover {
+    background-color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .crystal-slider {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .slider-left,
+    .slider-right {
+        flex: none;
+        width: 100%;
+        height: 50vh;
+        padding: 2rem;
+    }
+
+    .description-content {
+        max-width: 100%;
+    }
+
+    .crystal-large {
+        width: 200px;
+        height: 320px;
+    }
+
+    .crystal-title {
+        font-size: 2rem;
+    }
+
+    .crystal-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        margin-left: 0;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .crystal-slider {
+        padding-bottom: 80px;
+    }
+
+    .slider-left {
+        padding: 1.5rem;
+    }
+
+    .slider-right {
+        padding: 1.5rem;
+    }
+
+    .crystal-title {
+        font-size: 1.8rem;
+    }
+
+    .crystal-large {
+        width: 180px;
+        height: 280px;
+    }
+
+    .sun-glow,
+    .dark-aura {
+        width: 300px;
+        height: 300px;
+    }
+
+    .sun-rays {
+        width: 350px;
+        height: 350px;
+    }
+
+    .energy-pulses .pulse {
+        width: 250px;
+        height: 250px;
+    }
+
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .filter-section {
+        flex-direction: column;
+    }
+
+    .search-box,
+    .category-filter {
+        min-width: 100%;
+    }
+
+    .product-details-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .contact-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .crystal-slider {
+        flex-direction: column;
+    }
+
+    .slider-left,
+    .slider-right {
+        height: auto;
+        min-height: 50vh;
+        padding: 1rem;
+    }
+
+    .description-content {
+        max-width: 100%;
+    }
+
+    .crystal-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .crystal-description {
+        font-size: 0.95rem;
+    }
+
+    .crystal-large {
+        width: 150px;
+        height: 240px;
+    }
+
+    .sun-glow,
+    .dark-aura {
+        width: 250px;
+        height: 250px;
+    }
+
+    .sun-rays {
+        width: 300px;
+        height: 300px;
+    }
+
+    .energy-pulses .pulse {
+        width: 220px;
+        height: 220px;
+    }
+
+    .nav-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .arrow-left {
+        left: 5px;
+    }
+
+    .arrow-right {
+        right: 5px;
+    }
+
+    .slider-dots {
+        bottom: 20px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog h2,
+    .about h2,
+    .contact h2 {
+        font-size: 1.8rem;
+    }
+}

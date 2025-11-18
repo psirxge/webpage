@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManualShop - Продажа мануалов</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">ManualShop</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#catalog">Каталог</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒 <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="crystal-slider">
+                <!-- Left Panel with Description -->
+                <div class="slider-left">
+                    <div class="description-content">
+                        <h2 class="crystal-title" id="crystalTitle">Белый Кристал</h2>
+                        <p class="crystal-description" id="crystalDesc">Символ света и чистоты. Белый кристал излучает божественное сияние, подобно солнцу. Его сияние олицетворяет надежду и просветление, озаряя мир чистотой и добротой.</p>
+                        <div class="crystal-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Сияние</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Чистота</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Мощь</span>
+                                <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel with Crystal -->
+                <div class="slider-right">
+                    <div class="crystal-display">
+                        <!-- White Crystal -->
+                        <div class="crystal-item white-crystal-item active">
+                            <div class="crystal-large white-crystal">
+                                <div class="hexagon hexagon-1"></div>
+                                <div class="hexagon hexagon-2"></div>
+                                <div class="hexagon hexagon-3"></div>
+                            </div>
+                            <div class="sun-glow"></div>
+                            <div class="sun-rays"></div>
+                        </div>
+
+                        <!-- Gray Crystal -->
+                        <div class="crystal-item gray-crystal-item">
+                            <div class="crystal-large gray-crystal">
+                                <div class="hexagon hexagon-1"></div>
+                                <div class="hexagon hexagon-2"></div>
+                                <div class="hexagon hexagon-3"></div>
+                            </div>
+                            <div class="wave-effect"></div>
+                            <div class="energy-pulses">
+                                <div class="pulse"></div>
+                                <div class="pulse"></div>
+                                <div class="pulse"></div>
+                            </div>
+                        </div>
+
+                        <!-- Black Crystal -->
+                        <div class="crystal-item black-crystal-item">
+                            <div class="crystal-large black-crystal">
+                                <div class="hexagon hexagon-1"></div>
+                                <div class="hexagon hexagon-2"></div>
+                                <div class="hexagon hexagon-3"></div>
+                            </div>
+                            <div class="dark-aura"></div>
+                            <div class="flame-effect-enhanced">
+                                <div class="flame-top"></div>
+                                <div class="flame-top"></div>
+                                <div class="flame-top"></div>
+                                <div class="flame-mid"></div>
+                                <div class="flame-mid"></div>
+                                <div class="flame-bot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button class="nav-arrow arrow-left" onclick="prevCrystal()">❮</button>
+                <button class="nav-arrow arrow-right" onclick="nextCrystal()">❯</button>
+
+                <!-- Dots Indicator -->
+                <div class="slider-dots">
+                    <span class="dot active" onclick="goToCrystal(0)"></span>
+                    <span class="dot" onclick="goToCrystal(1)"></span>
+                    <span class="dot" onclick="goToCrystal(2)"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog Section -->
+        <section id="catalog" class="catalog">
+            <div class="container">
+                <h2>Каталог мануалов</h2>
+                <div class="filter-section">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Поиск мануалов...">
+                    <select id="categoryFilter" class="category-filter">
+                        <option value="">Все категории</option>
+                        <option value="техника">Техника</option>
+                        <option value="смартфоны">Смартфоны</option>
+                        <option value="ноутбуки">Ноутбуки</option>
+                        <option value="игры">Игры</option>
+                    </select>
+                </div>
+                <div id="productsList" class="products-grid">
+                    <!-- Продукты будут загружены здесь -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2>О нас</h2>
+                <p>ManualShop - это онлайн-магазин с цифровыми мануалами и инструкциями для различных устройств и программного обеспечения. Мы предлагаем качественные, проверенные документы, которые помогут вам разобраться с любым устройством.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Контакты</h2>
+                <form id="contactForm" class="contact-form">
+                    <input type="text" placeholder="Ваше имя" required>
+                    <input type="email" placeholder="Ваш email" required>
+                    <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>Корзина покупок</h2>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total">
+                <strong>Итого: <span id="totalPrice">0</span> ₽</strong>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content modal-product">
+            <span class="close" onclick="closeProductModal()">&times;</span>
+            <div id="productDetails"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ManualShop. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
