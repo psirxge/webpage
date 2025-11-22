@@ -6,8 +6,9 @@ const products = [
         title: "Схема Arduino Uno",
         category: "белые схемы",
         price: 199,
-        emoji: "�",
-        description: "Полная схема подключения и настройки Arduino Uno с примерами кода",
+        emoji: "🔌",
+        description: "Полная схема подключения Arduino Uno",
+        fullDescription: "Полная схема подключения и настройки Arduino Uno с примерами кода, диаграммами и подробными инструкциями по программированию для начинающих и опытных пользователей.",
         rating: 4.9,
         reviews: 234,
         color: "white"
@@ -18,7 +19,8 @@ const products = [
         category: "белые схемы",
         price: 249,
         emoji: "🎛️",
-        description: "Детальная схема распиновки и подключения Raspberry Pi 4",
+        description: "Схема распиновки Raspberry Pi 4",
+        fullDescription: "Детальная схема распиновки и подключения Raspberry Pi 4, включая все GPIO, подключение периферии, рекомендации по питанию и охлаждению.",
         rating: 4.8,
         reviews: 178,
         color: "white"
@@ -28,8 +30,9 @@ const products = [
         title: "Схема LED матрицы",
         category: "белые схемы",
         price: 149,
-        emoji: "�",
-        description: "Полная документация по подключению и программированию LED матриц",
+        emoji: "💡",
+        description: "Подключение LED матриц",
+        fullDescription: "Полная документация по подключению и программированию LED матриц, управлению яркостью, созданию эффектов и интеграции с микроконтроллерами.",
         rating: 4.7,
         reviews: 156,
         color: "white"
@@ -41,7 +44,8 @@ const products = [
         category: "серые схемы",
         price: 179,
         emoji: "📡",
-        description: "Схема подключения и настройки Bluetooth модуля HC-05",
+        description: "Подключение Bluetooth модуля HC-05",
+        fullDescription: "Схема подключения и настройки Bluetooth модуля HC-05 для беспроводной связи, команды AT, прошивка и примеры для различных платформ.",
         rating: 4.8,
         reviews: 145,
         color: "gray"
@@ -52,7 +56,8 @@ const products = [
         category: "серые схемы",
         price: 189,
         emoji: "📺",
-        description: "Инструкция по подключению LCD 16x2 дисплея к микроконтроллерам",
+        description: "Подключение LCD дисплея",
+        fullDescription: "Инструкция по подключению LCD 16x2 дисплея к микроконтроллерам, программирование символов, примеры кода на Arduino и Python.",
         rating: 4.7,
         reviews: 167,
         color: "gray"
@@ -62,8 +67,9 @@ const products = [
         title: "Схема датчика влажности DHT22",
         category: "серые схемы",
         price: 159,
-        emoji: "�",
-        description: "Полная документация по использованию датчика влажности и температуры",
+        emoji: "💧",
+        description: "Датчик влажности и температуры",
+        fullDescription: "Полная документация по использованию датчика влажности и температуры DHT22, калибровка, коррекция ошибок и интеграция с системами мониторинга.",
         rating: 4.9,
         reviews: 189,
         color: "gray"
@@ -75,7 +81,8 @@ const products = [
         category: "чёрные схемы",
         price: 399,
         emoji: "⚡",
-        description: "Техническая документация и схема архитектуры NVIDIA RTX 4090",
+        description: "Архитектура NVIDIA RTX 4090",
+        fullDescription: "Техническая документация и схема архитектуры NVIDIA RTX 4090, характеристики CUDA ядер, TensorCore, оптимизация для DLSS и машинного обучения.",
         rating: 4.9,
         reviews: 312,
         color: "black"
@@ -86,7 +93,8 @@ const products = [
         category: "чёрные схемы",
         price: 349,
         emoji: "🔧",
-        description: "Детальная схема и инструкция по разборке Intel Core i9",
+        description: "Архитектура Intel Core i9",
+        fullDescription: "Детальная схема и инструкция по разборке Intel Core i9, архитектура ядер, кэш-иерархия, требования к охлаждению и оверклокингу.",
         rating: 4.8,
         reviews: 278,
         color: "black"
@@ -97,7 +105,8 @@ const products = [
         category: "чёрные схемы",
         price: 299,
         emoji: "⚙️",
-        description: "Полная техническая документация и схема материнской платы ASUS ROG",
+        description: "Материнская плата ASUS ROG",
+        fullDescription: "Полная техническая документация и схема материнской платы ASUS ROG, разъёмы, система питания, BIOS настройки и подводка жидкого охлаждения.",
         rating: 4.9,
         reviews: 295,
         color: "black"
@@ -133,12 +142,20 @@ function saveCartToStorage() {
 function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     const categoryFilter = document.getElementById('categoryFilter');
-
-    searchInput.addEventListener('input', filterProducts);
-    categoryFilter.addEventListener('change', filterProducts);
-    
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', handleContactForm);
+
+    // Эти элементы есть только на странице каталога
+    if (searchInput) {
+        searchInput.addEventListener('input', filterProducts);
+    }
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', filterProducts);
+    }
+    
+    // Форма контактов есть только на странице about.html
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactForm);
+    }
 }
 
 // Отрисовка продуктов
@@ -185,19 +202,50 @@ function openProductModal(productId) {
                 <h3>${product.title}</h3>
                 <div class="product-details-price">${product.price} ₽</div>
                 <div class="product-rating">⭐ ${product.rating} (${product.reviews} отзывов)</div>
-                <p class="product-details-description">${product.description}</p>
+                <p class="product-details-description">${product.fullDescription}</p>
                 <div class="product-quantity">
                     <label for="quantity">Количество:</label>
                     <input type="number" id="quantity" class="quantity-input" value="1" min="1">
                 </div>
-                <button class="btn btn-primary btn-block" onclick="addToCart(${product.id})">
-                    Добавить в корзину
+                <button class="btn btn-primary btn-block" onclick="buyProduct(${product.id})">
+                    Оформить заказ
                 </button>
             </div>
         </div>
     `;
 
     document.getElementById('productModal').classList.add('show');
+}
+
+// Функция для оформления заказа напрямую
+function buyProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+    const currentUser = getCurrentUser();
+
+    if (!currentUser) {
+        showNotification('Пожалуйста, войдите в аккаунт для покупки', 'error');
+        closeProductModal();
+        openAuthModal();
+        return;
+    }
+
+    // Добавляем товар в корзину
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({
+            ...product,
+            quantity: quantity
+        });
+    }
+
+    // Оформляем заказ
+    checkout();
+    closeProductModal();
 }
 
 // Закрытие модального окна товара
@@ -587,18 +635,15 @@ function updateAuthUI() {
     
     if (!authButton) return;
     
+    // Полностью переделываем кнопку авторизации
     if (currentUser) {
         authButton.textContent = '👤 ' + currentUser.split('@')[0];
-        authButton.style.cursor = 'pointer';
-        authButton.onclick = function(e) {
-            e.preventDefault();
+        authButton.onclick = function() {
             window.location.href = 'profile.html';
         };
     } else {
         authButton.textContent = '🔐 Вход';
-        authButton.style.cursor = 'pointer';
-        authButton.onclick = function(e) {
-            e.preventDefault();
+        authButton.onclick = function() {
             openAuthModal();
         };
     }

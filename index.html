@@ -52,7 +52,7 @@
                 <div class="slider-right">
                     <div class="crystal-display">
                         <!-- White Crystal -->
-                        <div class="crystal-item white-crystal-item active">
+                        <div class="crystal-item white-crystal-item active" id="whiteCrystal">
                             <div class="crystal-large white-crystal">
                                 <div class="hexagon hexagon-1"></div>
                                 <div class="hexagon hexagon-2"></div>
@@ -63,7 +63,7 @@
                         </div>
 
                         <!-- Gray Crystal -->
-                        <div class="crystal-item gray-crystal-item">
+                        <div class="crystal-item gray-crystal-item" id="grayCrystal">
                             <div class="crystal-large gray-crystal">
                                 <div class="hexagon hexagon-1"></div>
                                 <div class="hexagon hexagon-2"></div>
@@ -78,7 +78,7 @@
                         </div>
 
                         <!-- Black Crystal -->
-                        <div class="crystal-item black-crystal-item">
+                        <div class="crystal-item black-crystal-item" id="blackCrystal">
                             <div class="crystal-large black-crystal">
                                 <div class="hexagon hexagon-1"></div>
                                 <div class="hexagon hexagon-2"></div>
@@ -109,6 +109,23 @@
                 </div>
             </div>
         </section>
+        <script>
+        // Инициализация главной страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAuthUI();
+            
+            // Переход на каталог с фильтром по цвету
+            document.getElementById('whiteCrystal').addEventListener('click', function() {
+                window.location.href = 'catalog.html?category=белые схемы';
+            });
+            document.getElementById('grayCrystal').addEventListener('click', function() {
+                window.location.href = 'catalog.html?category=серые схемы';
+            });
+            document.getElementById('blackCrystal').addEventListener('click', function() {
+                window.location.href = 'catalog.html?category=чёрные схемы';
+            });
+        });
+        </script>
 
         <!-- Catalog Section -->
         <!-- ПЕРЕМЕЩЕН НА СТРАНИЦУ: catalog.html -->

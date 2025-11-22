@@ -76,10 +76,24 @@
     <script>
         // Инициализация страницы каталога
         document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
-            setupEventListeners();
+            // Проверяем параметр фильтра
+            const params = new URLSearchParams(window.location.search);
+            const category = params.get('category');
+            
             loadCartFromStorage();
             updateAuthUI();
+            
+            // Устанавливаем значение фильтра ПЕРЕД добавлением слушателей
+            if (category) {
+                const categoryFilter = document.getElementById('categoryFilter');
+                categoryFilter.value = category;
+            }
+            
+            // Теперь добавляем слушатели событий
+            setupEventListeners();
+            
+            // Отрисовываем товары с применением фильтра (если он был установлен)
+            filterProducts();
         });
     </script>
 </body>
