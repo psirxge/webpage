@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProducts(products);
     setupEventListeners();
     loadCartFromStorage();
+    updateAuthUI();
 });
 
 // Загрузка корзины из localStorage
@@ -249,55 +250,13 @@ function updateCartCount() {
 }
 
 // Переключение видимости корзины
-function toggleCart() {
-    const modal = document.getElementById('cartModal');
-    modal.classList.toggle('show');
-    if (modal.classList.contains('show')) {
-        renderCart();
-    }
-}
+// ФУНКЦИЯ УДАЛЕНА: корзина больше не используется
 
 // Отрисовка содержимого корзины
-function renderCart() {
-    const cartItems = document.getElementById('cartItems');
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<div class="empty-cart">Корзина пуста</div>';
-        document.getElementById('totalPrice').textContent = '0';
-        return;
-    }
-
-    cartItems.innerHTML = '';
-    let total = 0;
-
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-            <div class="cart-item-info">
-                <div class="cart-item-name">${item.title}</div>
-                <div>Кол-во: <strong>${item.quantity}</strong></div>
-                <div class="cart-item-price">${itemTotal} ₽</div>
-            </div>
-            <button class="cart-remove" onclick="removeFromCart(${item.id})">Удалить</button>
-        `;
-        cartItems.appendChild(cartItem);
-    });
-
-    document.getElementById('totalPrice').textContent = total;
-}
+// ФУНКЦИЯ УДАЛЕНА: корзина больше не используется
 
 // Удаление товара из корзины
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    saveCartToStorage();
-    updateCartCount();
-    renderCart();
-    showNotification('Товар удален из корзины');
-}
+// ФУНКЦИЯ УДАЛЕНА: корзина больше не используется
 
 // Оформление заказа
 function checkout() {
@@ -309,13 +268,47 @@ function checkout() {
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const orderSummary = cart.map(item => `${item.title} x${item.quantity}`).join(', ');
 
+    // Если пользователь авторизован, сохраняем покупку
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+        const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+        
+        // Инициализируем массивы если их нет
+        if (!accounts[currentUser].purchases) {
+            accounts[currentUser].purchases = [];
+        }
+        if (!accounts[currentUser].purchasedItems) {
+            accounts[currentUser].purchasedItems = [];
+        }
+
+        // Добавляем запись о покупке в историю
+        accounts[currentUser].purchases.push({
+            date: new Date().toISOString(),
+            items: orderSummary,
+            total: total
+        });
+
+        // Добавляем каждый товар в массив купленных товаров
+        cart.forEach(item => {
+            accounts[currentUser].purchasedItems.push({
+                id: item.id,
+                title: item.title,
+                category: item.category,
+                price: item.price,
+                emoji: item.emoji,
+                description: item.description,
+                purchaseDate: new Date().toISOString()
+            });
+        });
+
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+    }
+
     alert(`Заказ оформлен!\n\nТовары: ${orderSummary}\n\nСумма: ${total} ₽\n\nСпасибо за покупку!`);
     
     cart = [];
     saveCartToStorage();
-    updateCartCount();
-    toggleCart();
-    showNotification('Заказ успешно оформлен!');
+    showNotification('Заказ успешно оформлен! Товары добавлены в ваш профиль.');
 }
 
 // Обработка формы контактов
@@ -441,3 +434,172 @@ document.addEventListener('keydown', (e) => {
         prevCrystal();
     }
 });
+
+// ===== СИСТЕМА АККАУНТОВ =====
+
+// Получение текущего пользователя
+function getCurrentUser() {
+    return localStorage.getItem('currentUser');
+}
+
+// Установка текущего пользователя
+function setCurrentUser(email) {
+    localStorage.setItem('currentUser', email);
+    updateAuthUI();
+}
+
+// Выход из аккаунта
+function logout() {
+    localStorage.removeItem('currentUser');
+    updateAuthUI();
+    window.location.href = 'index.html';
+}
+
+// Регистрация нового пользователя
+function registerUser(email, password) {
+    // Получаем все аккаунты
+    let accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+    
+    // Проверяем, не существует ли уже такой email
+    if (accounts[email]) {
+        showNotification('Этот email уже зарегистрирован', 'error');
+        return false;
+    }
+    
+    // Сохраняем новый аккаунт
+    accounts[email] = {
+        password: password,
+        createdAt: new Date().toISOString(),
+        purchases: [],
+        purchasedItems: []
+    };
+    
+    localStorage.setItem('accounts', JSON.stringify(accounts));
+    setCurrentUser(email);
+    showNotification('Аккаунт успешно создан!');
+    closeAuthModal();
+    
+    // Перенаправляем на профиль
+    setTimeout(() => {
+        window.location.href = 'profile.html';
+    }, 1000);
+    
+    return true;
+}
+
+// Вход в аккаунт
+function loginUser(email, password) {
+    const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+    
+    if (!accounts[email]) {
+        showNotification('Пользователь не найден', 'error');
+        return false;
+    }
+    
+    if (accounts[email].password !== password) {
+        showNotification('Неверный пароль', 'error');
+        return false;
+    }
+    
+    setCurrentUser(email);
+    showNotification('Вы успешно вошли в аккаунт!');
+    closeAuthModal();
+    
+    // Перенаправляем на профиль
+    setTimeout(() => {
+        window.location.href = 'profile.html';
+    }, 1000);
+    
+    return true;
+}
+
+// Открытие модального окна авторизации
+function openAuthModal() {
+    document.getElementById('authModal').classList.add('show');
+    showLoginForm();
+}
+
+// Закрытие модального окна авторизации
+function closeAuthModal() {
+    document.getElementById('authModal').classList.remove('show');
+}
+
+// Показ формы регистрации
+function showRegisterForm() {
+    const authContent = document.getElementById('authContent');
+    authContent.innerHTML = `
+        <h2>Регистрация</h2>
+        <form id="registerForm" class="auth-form">
+            <input type="email" id="registerEmail" class="auth-input" placeholder="Email" required>
+            <input type="password" id="registerPassword" class="auth-input" placeholder="Пароль" required>
+            <input type="password" id="registerPasswordConfirm" class="auth-input" placeholder="Подтвердите пароль" required>
+            <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+        </form>
+        <p class="auth-toggle">Уже есть аккаунт? <a href="#" onclick="showLoginForm(); return false;">Войти</a></p>
+    `;
+    
+    document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+        
+        if (password !== passwordConfirm) {
+            showNotification('Пароли не совпадают', 'error');
+            return;
+        }
+        
+        if (password.length < 3) {
+            showNotification('Пароль должен быть не менее 3 символов', 'error');
+            return;
+        }
+        
+        registerUser(email, password);
+    });
+}
+
+// Показ формы входа
+function showLoginForm() {
+    const authContent = document.getElementById('authContent');
+    authContent.innerHTML = `
+        <h2>Вход</h2>
+        <form id="loginForm" class="auth-form">
+            <input type="email" id="loginEmail" class="auth-input" placeholder="Email" required>
+            <input type="password" id="loginPassword" class="auth-input" placeholder="Пароль" required>
+            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+        </form>
+        <p class="auth-toggle">Нет аккаунта? <a href="#" onclick="showRegisterForm(); return false;">Регистрация</a></p>
+    `;
+    
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        loginUser(email, password);
+    });
+}
+
+// Обновление UI в зависимости от статуса авторизации
+function updateAuthUI() {
+    const currentUser = getCurrentUser();
+    const authButton = document.getElementById('authButton');
+    
+    if (!authButton) return;
+    
+    if (currentUser) {
+        authButton.textContent = '👤 ' + currentUser.split('@')[0];
+        authButton.style.cursor = 'pointer';
+        authButton.onclick = function(e) {
+            e.preventDefault();
+            window.location.href = 'profile.html';
+        };
+    } else {
+        authButton.textContent = '🔐 Вход';
+        authButton.style.cursor = 'pointer';
+        authButton.onclick = function(e) {
+            e.preventDefault();
+            openAuthModal();
+        };
+    }
+}

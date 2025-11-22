@@ -10,15 +10,13 @@
     <header>
         <nav class="navbar">
             <div class="container">
-                <div class="logo">ManualShop</div>
+                <a href="index.html" class="logo">ManualShop</a>
                 <ul class="nav-links">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#catalog">Каталог</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">Контакты</a></li>
                 </ul>
-                <div class="cart-icon" onclick="toggleCart()">
-                    🛒 <span class="cart-count" id="cartCount">0</span>
+                <div class="header-controls">
+                    <div class="auth-button" id="authButton">🔐 Вход</div>
                 </div>
             </div>
         </nav>
@@ -113,64 +111,31 @@
         </section>
 
         <!-- Catalog Section -->
-        <section id="catalog" class="catalog">
-            <div class="container">
-                <h2>Каталог мануалов</h2>
-                <div class="filter-section">
-                    <input type="text" id="searchInput" class="search-box" placeholder="Поиск мануалов...">
-                    <select id="categoryFilter" class="category-filter">
-                        <option value="">Все категории</option>
-                        <option value="белые схемы">Белые схемы</option>
-                        <option value="серые схемы">Серые схемы</option>
-                        <option value="чёрные схемы">Чёрные схемы</option>
-                    </select>
-                </div>
-                <div id="productsList" class="products-grid">
-                    <!-- Продукты будут загружены здесь -->
-                </div>
-            </div>
-        </section>
+        <!-- ПЕРЕМЕЩЕН НА СТРАНИЦУ: catalog.html -->
 
         <!-- About Section -->
-        <section id="about" class="about">
-            <div class="container">
-                <h2>О нас</h2>
-                <p>ManualShop - это онлайн-магазин с цифровыми мануалами и инструкциями для различных устройств и программного обеспечения. Мы предлагаем качественные, проверенные документы, которые помогут вам разобраться с любым устройством.</p>
-            </div>
-        </section>
+        <!-- ПЕРЕМЕЩЕН НА СТРАНИЦУ: about.html -->
 
         <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2>Контакты</h2>
-                <form id="contactForm" class="contact-form">
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="email" placeholder="Ваш email" required>
-                    <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                </form>
-            </div>
-        </section>
+        <!-- ПЕРЕМЕЩЕН НА СТРАНИЦУ: about.html -->
     </main>
 
     <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="toggleCart()">&times;</span>
-            <h2>Корзина покупок</h2>
-            <div id="cartItems" class="cart-items"></div>
-            <div class="cart-total">
-                <strong>Итого: <span id="totalPrice">0</span> ₽</strong>
-            </div>
-            <button class="btn btn-primary btn-block" onclick="checkout()">Оформить заказ</button>
-        </div>
-    </div>
+    <!-- УДАЛЕНА: корзина больше не используется -->
 
     <!-- Product Modal -->
     <div id="productModal" class="modal">
         <div class="modal-content modal-product">
             <span class="close" onclick="closeProductModal()">&times;</span>
             <div id="productDetails"></div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAuthModal()">&times;</span>
+            <div id="authContent"></div>
         </div>
     </div>
 

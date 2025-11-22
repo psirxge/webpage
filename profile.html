@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - ManualShop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">ManualShop</a>
+                <ul class="nav-links">
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">Контакты</a></li>
+                </ul>
+                <div class="header-controls">
+                    <div class="auth-button" id="authButton">👤 Профиль</div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <div class="container">
+                <h1>Личный кабинет</h1>
+                <div class="profile-container">
+                    <div class="profile-card">
+                        <h2>Информация профиля</h2>
+                        <div class="profile-info">
+                            <div class="info-item">
+                                <label>Email:</label>
+                                <p id="userEmail"></p>
+                            </div>
+                            <div class="info-item">
+                                <label>Дата регистрации:</label>
+                                <p id="registrationDate"></p>
+                            </div>
+                            <div class="info-item">
+                                <label>Купленные мануалы:</label>
+                                <p id="purchaseCount">0</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="logout()">Выйти из аккаунта</button>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2>История покупок</h2>
+                        <div id="purchaseHistory" class="purchase-history">
+                            <p class="empty-message">У вас нет покупок</p>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h2>Купленные товары</h2>
+                        <div id="purchasedProducts" class="purchased-products">
+                            <p class="empty-message">Вы еще ничего не купили</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Modal -->
+    <!-- УДАЛЕНА: корзина больше не используется -->
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 ManualShop. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="terms.html" target="_blank" rel="noopener noreferrer">Пользовательское соглашение</a>
+                    <span class="footer-separator">|</span>
+                    <a href="policy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Инициализация страницы профиля
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            displayProfileInfo();
+        });
+
+        function displayProfileInfo() {
+            const currentUser = getCurrentUser();
+            const accounts = JSON.parse(localStorage.getItem('accounts') || '{}');
+            const userAccount = accounts[currentUser];
+
+            if (!userAccount) return;
+
+            document.getElementById('userEmail').textContent = currentUser;
+            
+            const createdDate = new Date(userAccount.createdAt);
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('registrationDate').textContent = createdDate.toLocaleDateString('ru-RU', dateOptions);
+            
+            // История покупок
+            const purchases = (userAccount.purchases || []);
+            document.getElementById('purchaseCount').textContent = purchases.length;
+
+            if (purchases && purchases.length > 0) {
+                const historyHtml = purchases.map(purchase => `
+                    <div class="purchase-item">
+                        <div class="purchase-date">${new Date(purchase.date).toLocaleDateString('ru-RU')}</div>
+                        <div class="purchase-details">
+                            <p>${purchase.items}</p>
+                            <strong>Сумма: ${purchase.total} ₽</strong>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('purchaseHistory').innerHTML = historyHtml;
+            }
+
+            // Отображение купленных товаров
+            displayPurchasedProducts(userAccount.purchasedItems || []);
+        }
+
+        function displayPurchasedProducts(purchasedItems) {
+            const container = document.getElementById('purchasedProducts');
+            
+            if (!purchasedItems || purchasedItems.length === 0) {
+                container.innerHTML = '<p class="empty-message">Вы еще ничего не купили</p>';
+                return;
+            }
+
+            const productsHtml = purchasedItems.map(item => `
+                <div class="purchased-item">
+                    <div class="purchased-header">
+                        <span class="purchased-emoji">${item.emoji}</span>
+                        <div class="purchased-info">
+                            <h4>${item.title}</h4>
+                            <p class="purchased-category">${item.category}</p>
+                            <p class="purchased-date">Куплено: ${new Date(item.purchaseDate).toLocaleDateString('ru-RU')}</p>
+                        </div>
+                    </div>
+                    <div class="purchased-content">
+                        <p class="purchased-description">${item.description}</p>
+                        <button class="btn btn-primary" onclick="accessPurchasedItem(${item.id})">Открыть</button>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = productsHtml;
+        }
+
+        function accessPurchasedItem(productId) {
+            alert('Заготовка: доступ к купленному товару #' + productId);
+        }
+    </script>
+</body>
+</html>
